@@ -18,9 +18,7 @@ class Html2PdfTestcase(TestCase):
         bstring = get_b64_string_from_pdf("./40000_report.pdf")
         self.assertEqual("JVBER", bstring[:5])
 
-
     def test_dict_to_b64(self):
-
         obj = {
             'function': 'something',
             'kwargs': {}
@@ -30,7 +28,6 @@ class Html2PdfTestcase(TestCase):
         self.assertEqual(res, "eyJmdW5jdGlvbiI6ICJzb21ldGhpbmciLCAia3dhcmdzIjoge319")
 
     def test_b64_to_dict(self):
-
         res = b64_to_dict("eyJmdW5jdGlvbiI6ICJzb21ldGhpbmciLCAia3dhcmdzIjoge319")
         self.assertEqual(res['function'], 'something')
 
@@ -193,9 +190,6 @@ class LiveHandlerTestCase(TestCase):
         import os
         url = os.environ.get('LIVE_URL')
 
-        res = requests.post(url=url, json=body, headers={
-            'Content-Type': 'application/json'
-        })
+        res = requests.post(url=url, json=body)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(json.loads(res.content)['result'][0][:5], "iVBOR")
-
